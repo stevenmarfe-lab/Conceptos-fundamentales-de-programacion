@@ -9,6 +9,7 @@ public class DigitCounter {
         Scanner scanner = new Scanner(System.in);
 
         // Message for the entry
+        System.out.print("Please, enter your number: ");
         if (scanner.hasNextLong()) {
             long number = scanner.nextLong();
             
