@@ -1,23 +1,22 @@
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class IDYear {
+public class Main {
 
     // This is a expression that validates exactly 11 digits and ensures the first one is not 0
-    private static final String ID_regex = "^[1-9][0-9]{10}$";
+    private static final String ID_REGEX = "^[1-9][0-9]{10}$";
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Please enter your ID number: ");
-        System.out.print("Remember that your ID only have 11 digits");
         String input = scanner.nextLine().trim();
 
         scanner.close();
 
         try {
             int year = extractYear(input);
-            System.out.println("Your year: " + year);
+            System.out.println("This is your year: " + year);
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -38,7 +37,7 @@ public class IDYear {
 
     private static void validateIdNumber(String ID) {
         // Clean and straightforward validation using regular expressions
-        if (ID == null || !Pattern.matches(ID_regex, ID)) {
+        if (ID == null || !Pattern.matches(ID_REGEX, ID)) {
             throw new IllegalArgumentException(
                 "Your ID must be positive, have exactly 11 digits, and the first digit cannot be 0."
             );
