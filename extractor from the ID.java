@@ -1,27 +1,47 @@
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
-public class YearID {
+public class IDYear {
 
-    /**Extrae el año (los dos primeros dígitos) de un número de documento de 11 dígitos. 
-     * @param ID Número entero positivo de 11 dígitos (long para evitar desbordamiento).
-     * @return int Número entero que representa el año.
-     */
-    public static int Year (long ID) {
-        // Convertimos el número a cadena de texto para manipular sus posiciones
-        String textnumber = Long.toString(ID);
-        
-        // Extraemos los primeros dos caracteres correspondientes al año (YY) y los convertimos a entero
-        String subAno = textnumber.substring(0, 2);
-        
-        return Integer.parseInt(subAno);
+    // This is a expression that validates exactly 11 digits and ensures the first one is not 0
+    private static final String ID_regex = "^[1-9][0-9]{10}$";
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Please enter your ID number: ");
+        System.out.print("Remember that your ID only have 11 digits");
+        String input = scanner.nextLine().trim();
+
+        scanner.close();
+
+        try {
+            int year = extractYear(input);
+            System.out.println("Your year: " + year);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
-    // Método principal para pruebas y ejemplo
-    public static void main(String[] args) {
-        long entrance = 86021912345L;
-        int exit = Year(entrance);
-        
-        System.out.println("Entrance: " + entrance);
-        System.out.println("exit:  " + exit);
+    public static int extractYear(String ID) {
+        validateIdNumber(ID);
+
+        // This part convert to a long integer to perform mathematical operations
+        long numberComplete = Long.parseLong(ID);
+
+        // This part divide by 10^9 the ID number, since it is an 11 digit number
+        // Also, keep only the first two whole number digits or the year
+        long anoLong = numberComplete / 1_000_000_000L;
+
+        return (int) anoLong;
+    }
+
+    private static void validateIdNumber(String ID) {
+        // Clean and straightforward validation using regular expressions
+        if (ID == null || !Pattern.matches(ID_regex, ID)) {
+            throw new IllegalArgumentException(
+                "Your ID must be positive, have exactly 11 digits, and the first digit cannot be 0."
+            );
+        }
     }
 }
