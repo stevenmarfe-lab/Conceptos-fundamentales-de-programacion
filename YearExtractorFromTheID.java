@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Main {
+public class YearExtractorFromTheID {
 
     // This is a expression that validates exactly 11 digits and ensures the first one is not 0
     private static final String ID_REGEX = "^[1-9][0-9]{10}$";
