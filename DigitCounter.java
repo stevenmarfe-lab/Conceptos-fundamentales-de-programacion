@@ -15,7 +15,8 @@ public class DigitCounter {
             
             try {
                 int Digits = counter(number);
-                System.out.println(Digits);
+                //Message for the exit
+                System.out.println("The number " + number + " have " + Digits + " digit(s)");
             } catch (IllegalArgumentException e) {
                 System.out.println("Error: " + e.getMessage());
             }
@@ -26,12 +27,9 @@ public class DigitCounter {
         scanner.close();
     }
 
-    /**
-     * This counts the number of digits in the allowed range
-     * 
-     * @param number is the number between -3,000,000,000 and 3,000,000,000
-     * @return int help to understand the number of digits (excluding the negative sign)
-     */
+    //This counts the number of digits in the allowed range
+    // @param number is the number between -3,000,000,000 and 3,000,000,000
+    // @return int help to understand the number of digits (excluding the negative sign)
     public static int counter(long number) {
         // Verify that it falls within the limits specified in the allowed range
         if (number < MIN_VAL || number > MAX_VAL) {
